@@ -219,47 +219,6 @@
             transform: translateY(0);
         }
 
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid #c3e6cb;
-            display: none;
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid #f5c6cb;
-            display: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -287,19 +246,6 @@
         .required {
             color: #e74c3c;
         }
-
-        .integration-info {
-            background: #e3f2fd;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #2196f3;
-        }
-
-        .integration-info h4 {
-            color: #1976d2;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -310,32 +256,12 @@
         </div>
 
         <div class="form-content">
-            <div class="integration-info">
-                <h4>📋 Automated Patient Data Management</h4>
-                <p>This form automatically creates a PDF of patient responses and organizes them in your Google Drive "Patient List" folder by patient name. No manual data entry required!</p>
-            </div>
-
             <div class="intro-text">
                 <p><strong>Before you are able to receive TMS treatment, we need to make sure that it is safe for you to do so.</strong> To that end, we need information about the possible factors that could enhance your risk to experience unintentional adverse effects. Please fill out the questionnaire carefully and honestly. This form will subsequently be assessed by a physician.</p>
-                <p style="margin-top: 15px;"><em>Your responses will be automatically saved and organized in your patient file.</em></p>
+                <p style="margin-top: 15px;"><em>Please also sign at the bottom of each page</em></p>
             </div>
 
-            <div class="success-message" id="successMessage">
-                <h4>✅ Form Submitted Successfully!</h4>
-                <p>Your consent form has been submitted and automatically saved to your patient file. You will receive a confirmation email shortly.</p>
-            </div>
-
-            <div class="error-message" id="errorMessage">
-                <h4>❌ Submission Error</h4>
-                <p>There was an error submitting your form. Please try again or contact HealMed Clinic directly.</p>
-            </div>
-
-            <div class="loading" id="loadingMessage">
-                <div class="spinner"></div>
-                <p>Processing your form and creating your patient file...</p>
-            </div>
-
-            <form id="tmsForm">
+            <form action="mailto:healmedclinic@gmail.com" method="post" enctype="text/plain" id="tmsForm">
                 <!-- Personal Information -->
                 <div class="form-group">
                     <label for="fullName">First- and last name: <span class="required">*</span></label>
@@ -519,8 +445,139 @@
                         <textarea name="q8_details" placeholder="If you answered 'yes' to any of the questions above, please specify:"></textarea>
                     </div>
 
-                    <!-- Continue with remaining questions... -->
-                    <!-- I'll include a few more key questions for demonstration -->
+                    <div class="question">
+                        <div class="question-text">9) Do you have any deviations of the spinal cord, bone marrow, or the ventricular system (spaces in the brain filled with liquid)?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q9_yes" name="q9_deviations" value="Yes">
+                                <label for="q9_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q9_no" name="q9_deviations" value="No">
+                                <label for="q9_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q9_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">10) Do you have any hearing disabilities or ringing in your ears?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q10_yes" name="q10_hearing" value="Yes">
+                                <label for="q10_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q10_no" name="q10_hearing" value="No">
+                                <label for="q10_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q10_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">11) Have you ever (at present or in the past) suffered from a brain-related, neurological illness?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q11_yes" name="q11_neurological" value="Yes">
+                                <label for="q11_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q11_no" name="q11_neurological" value="No">
+                                <label for="q11_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q11_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">12) Do you suffer from frequent severe headaches?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q12_yes" name="q12_headaches" value="Yes">
+                                <label for="q12_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q12_no" name="q12_headaches" value="No">
+                                <label for="q12_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q12_details" placeholder="If yes, please describe how often, and on which occasions:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">13) Are you currently under any form of medical treatment?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q13_yes" name="q13_treatment" value="Yes">
+                                <label for="q13_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q13_no" name="q13_treatment" value="No">
+                                <label for="q13_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q13_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">14) Are you currently taking antibiotics (a medication that helps alleviate bacterial infections)?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q14_yes" name="q14_antibiotics" value="Yes">
+                                <label for="q14_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q14_no" name="q14_antibiotics" value="No">
+                                <label for="q14_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">15) Do you ever take antihistamines (anti-allergy medication)?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q15_yes" name="q15_antihistamines" value="Yes">
+                                <label for="q15_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q15_no" name="q15_antihistamines" value="No">
+                                <label for="q15_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q15_details" placeholder="If yes, how often and when was the last time you took them?"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">16) Are you taking any other medications not mentioned above?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q16_yes" name="q16_other_meds" value="Yes">
+                                <label for="q16_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q16_no" name="q16_other_meds" value="No">
+                                <label for="q16_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q16_details" placeholder="If yes, please list:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">17) Do you have a chronic illness/disorder?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q17_yes" name="q17_chronic" value="Yes">
+                                <label for="q17_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q17_no" name="q17_chronic" value="No">
+                                <label for="q17_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q17_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
 
                     <div class="question">
                         <div class="question-text">18) Have you ever (at present or in the past) had a psychiatric-based illness/disorder?</div>
@@ -538,6 +595,81 @@
                     </div>
 
                     <div class="question">
+                        <div class="question-text">19) Does someone in your family have a psychiatric-based illness/disorder?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q19_yes" name="q19_family_psychiatric" value="Yes">
+                                <label for="q19_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q19_no" name="q19_family_psychiatric" value="No">
+                                <label for="q19_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q19_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q19_relation" placeholder="How are you related to this person?"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">20) Have you used any recreational drugs during the past year (such as marijuana, ecstasy, cocaine, etc.)?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q20_yes" name="q20_drugs" value="Yes">
+                                <label for="q20_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q20_no" name="q20_drugs" value="No">
+                                <label for="q20_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q20_details" placeholder="If yes, please specify which drugs did you use, and when was the last time that you used them?"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">22) Have you ever suffered from substance dependence or abuse?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q22_yes" name="q22_substance_abuse" value="Yes">
+                                <label for="q22_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q22_no" name="q22_substance_abuse" value="No">
+                                <label for="q22_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q22_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">23) Do you averagely consume more than 3 alcoholic units a day?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q23_yes" name="q23_alcohol" value="Yes">
+                                <label for="q23_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q23_no" name="q23_alcohol" value="No">
+                                <label for="q23_no">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">24) Do you have sleeping problems?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q24_yes" name="q24_sleep" value="Yes">
+                                <label for="q24_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q24_no" name="q24_sleep" value="No">
+                                <label for="q24_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q24_details" placeholder="If yes, please specify:"></textarea>
+                    </div>
+
+                    <div class="question">
                         <div class="question-text">25) Are you pregnant, or is there a chance that you might be?</div>
                         <div class="yes-no-group">
                             <div class="radio-option">
@@ -549,6 +681,21 @@
                                 <label for="q25_no">No</label>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">26) Have you ever undergone an MRI for clinical purposes?</div>
+                        <div class="yes-no-group">
+                            <div class="radio-option">
+                                <input type="radio" id="q26_yes" name="q26_mri" value="Yes">
+                                <label for="q26_yes">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="q26_no" name="q26_mri" value="No">
+                                <label for="q26_no">No</label>
+                            </div>
+                        </div>
+                        <textarea name="q26_details" placeholder="If yes, did any problems occur during scanning? If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -598,67 +745,108 @@
                 </div>
 
                 <div class="submit-section">
-                    <button type="submit" class="submit-btn">Submit Consent Form</button>
+                    <button type="submit" class="submit-btn" onclick="submitForm()">Submit Consent Form</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
+        function submitForm() {
+            // Get form data
+            const form = document.getElementById('tmsForm');
+            const formData = new FormData(form);
+            
+            // Create email body
+            let emailBody = "TMS Informed Consent Form Submission\n\n";
+            emailBody += "=== PATIENT INFORMATION ===\n";
+            emailBody += `Name: ${formData.get('fullName')}\n`;
+            emailBody += `Gender: ${formData.get('gender')}\n`;
+            emailBody += `Date of Birth: ${formData.get('dob')}\n`;
+            emailBody += `Phone: ${formData.get('phone')}\n`;
+            emailBody += `Email: ${formData.get('email')}\n\n`;
+            
+            emailBody += "=== SCREENING QUESTIONNAIRE RESPONSES ===\n";
+            
+            // Add all questions and responses
+            const questions = [
+                {key: 'q1_epilepsy', text: '1) Do you have epilepsy?', details: 'q1_details'},
+                {key: 'q2_seizure', text: '2) Have you ever had a convulsion or a seizure?', details: 'q2_details'},
+                {key: 'q3_family_epilepsy', text: '3) Does someone in your family have epilepsy?', details: 'q3_details'},
+                {key: 'q4_consciousness', text: '4) Have you ever lost consciousness without any known reason?', details: 'q4_details'},
+                {key: 'q5_head_trauma', text: '5) Have you ever had a severe head trauma?', details: 'q5_details'},
+                {key: 'q6_stroke', text: '6) Have you ever had a stroke?', details: 'q6_details'},
+                {key: 'q7_head_surgery', text: '7) Have you ever undergone surgery to your head?', details: 'q7_details'},
+                {key: 'q9_deviations', text: '9) Do you have any deviations of the spinal cord, bone marrow, or ventricular system?', details: 'q9_details'},
+                {key: 'q10_hearing', text: '10) Do you have any hearing disabilities or ringing in your ears?', details: 'q10_details'},
+                {key: 'q11_neurological', text: '11) Have you ever suffered from a brain-related, neurological illness?', details: 'q11_details'},
+                {key: 'q12_headaches', text: '12) Do you suffer from frequent severe headaches?', details: 'q12_details'},
+                {key: 'q13_treatment', text: '13) Are you currently under any form of medical treatment?', details: 'q13_details'},
+                {key: 'q14_antibiotics', text: '14) Are you currently taking antibiotics?'},
+                {key: 'q15_antihistamines', text: '15) Do you ever take antihistamines?', details: 'q15_details'},
+                {key: 'q16_other_meds', text: '16) Are you taking any other medications not mentioned above?', details: 'q16_details'},
+                {key: 'q17_chronic', text: '17) Do you have a chronic illness/disorder?', details: 'q17_details'},
+                {key: 'q18_psychiatric', text: '18) Have you ever had a psychiatric-based illness/disorder?', details: 'q18_details'},
+                {key: 'q19_family_psychiatric', text: '19) Does someone in your family have a psychiatric-based illness/disorder?', details: 'q19_details'},
+                {key: 'q20_drugs', text: '20) Have you used any recreational drugs during the past year?', details: 'q20_details'},
+                {key: 'q22_substance_abuse', text: '22) Have you ever suffered from substance dependence or abuse?', details: 'q22_details'},
+                {key: 'q23_alcohol', text: '23) Do you averagely consume more than 3 alcoholic units a day?'},
+                {key: 'q24_sleep', text: '24) Do you have sleeping problems?', details: 'q24_details'},
+                {key: 'q25_pregnant', text: '25) Are you pregnant, or is there a chance that you might be?'},
+                {key: 'q26_mri', text: '26) Have you ever undergone an MRI for clinical purposes?', details: 'q26_details'},
+                {key: 'q27_tms', text: '27) Have you ever undergone TMS?', details: 'q27_details'}
+            ];
+            
+            questions.forEach(q => {
+                const answer = formData.get(q.key);
+                if (answer) {
+                    emailBody += `${q.text} ${answer}\n`;
+                    if (q.details && formData.get(q.details)) {
+                        emailBody += `   Details: ${formData.get(q.details)}\n`;
+                    }
+                }
+            });
+            
+            // Add implants
+            const implants = formData.getAll('implants');
+            if (implants.length > 0) {
+                emailBody += `8) Implants in body: ${implants.join(', ')}\n`;
+                if (formData.get('q8_details')) {
+                    emailBody += `   Details: ${formData.get('q8_details')}\n`;
+                }
+            }
+            
+            // Add TMS reaction
+            if (formData.get('q27_tms_reaction')) {
+                emailBody += `   TMS Adverse Reaction: ${formData.get('q27_tms_reaction')}\n`;
+            }
+            
+            // Add family psychiatric relation
+            if (formData.get('q19_relation')) {
+                emailBody += `   Family Relation: ${formData.get('q19_relation')}\n`;
+            }
+            
+            emailBody += "\n=== CONSENT ===\n";
+            emailBody += `Signature: ${formData.get('signature')}\n`;
+            emailBody += `Date: ${formData.get('signatureDate')}\n`;
+            emailBody += "\nPatient has consented to undergo transcranial magnetic stimulation under physician care and direction.\n";
+            
+            // Create mailto link
+            const subject = encodeURIComponent("TMS Informed Consent Form - " + formData.get('fullName'));
+            const body = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:healmedclinic@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Prevent default form submission
+            return false;
+        }
+        
         // Set today's date as default for signature date
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('signatureDate').value = today;
-        });
-
-        // Handle form submission
-        document.getElementById('tmsForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const loadingDiv = document.getElementById('loadingMessage');
-            const successDiv = document.getElementById('successMessage');
-            const errorDiv = document.getElementById('errorMessage');
-            const form = e.target;
-            
-            // Hide all messages
-            loadingDiv.style.display = 'none';
-            successDiv.style.display = 'none';
-            errorDiv.style.display = 'none';
-            
-            // Show loading
-            loadingDiv.style.display = 'block';
-            
-            try {
-                // Simulate API call to Google Apps Script
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                
-                // Get multiple checkbox values
-                const implants = formData.getAll('implants');
-                data.implants = implants;
-                
-                // Simulate successful submission
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Hide loading and show success
-                loadingDiv.style.display = 'none';
-                successDiv.style.display = 'block';
-                
-                // Scroll to success message
-                successDiv.scrollIntoView({ behavior: 'smooth' });
-                
-                // Reset form
-                form.reset();
-                
-                // Reset signature date
-                document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
-                
-            } catch (error) {
-                console.error('Submission error:', error);
-                loadingDiv.style.display = 'none';
-                errorDiv.style.display = 'block';
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
-            }
         });
     </script>
 </body>

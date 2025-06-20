@@ -218,6 +218,7 @@
             font-size: 1.1em;
             color: #047857; /* Darker green text */
             max-width: 90%;
+            border-left: 4px solid;
         }
 
         .message-box.error {
@@ -755,22 +756,21 @@
     <!-- Message Box for Success/Error -->
     <div id="messageBox" class="message-box"></div>
 
-    <!-- Firebase SDK - IMPORTANT: Replace with your actual config -->
+    <!-- Firebase SDK - IMPORTANT: Your actual config -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
-       / Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBkDIpwGI8mU-xcDIuKVurEiMCJE2IksDI",
-  authDomain: "consent-form-5a399.firebaseapp.com",
-  projectId: "consent-form-5a399",
-  storageBucket: "consent-form-5a399.firebasestorage.app",
-  messagingSenderId: "577373619871",
-  appId: "1:577373619871:web:181f98d0a4e21a58e284aa",
-  measurementId: "G-3LZ6RCM4VH"
-};
+        // YOUR SPECIFIC FIREBASE CONFIGURATION (Copied from your previous messages)
+        const firebaseConfig = {
+          apiKey: "AIzaSyBkDIpwGI8mU-xcDIuKVurEiMCJE2IksDI",
+          authDomain: "consent-form-5a399.firebaseapp.com",
+          projectId: "consent-form-5a399",
+          storageBucket: "consent-form-5a399.firebasestorage.app",
+          messagingSenderId: "577373619871",
+          appId: "1:577373619871:web:181f98d0a4e21a58e284aa",
+          measurementId: "G-3LZ6RCM4VH"
+        };
 
 
         // Initialize Firebase
@@ -785,6 +785,8 @@ const firebaseConfig = {
             messageBox.className = 'message-box'; // Reset classes
             if (isError) {
                 messageBox.classList.add('error');
+            } else {
+                messageBox.classList.add('success'); // Add success class if not error
             }
             messageBox.style.display = 'block';
             setTimeout(() => {
@@ -793,7 +795,7 @@ const firebaseConfig = {
         }
 
         tmsForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission (which would try mailto)
+            e.preventDefault(); // Prevent default form submission (e.g., mailto or page reload)
 
             const formData = new FormData(tmsForm);
             const data = {};
@@ -812,6 +814,8 @@ const firebaseConfig = {
             // Capture the submission timestamp
             data.submissionTimestamp = new Date().toISOString();
 
+            console.log("Attempting to save data to Firestore:", data); // Log data being sent
+
             try {
                 // Add a new document to the "consentForms" collection
                 await addDoc(collection(db, "consentForms"), data);
@@ -824,9 +828,15 @@ const firebaseConfig = {
                     textarea.value = '';
                 });
 
+                console.log("Data saved successfully!");
+
             } catch (e) {
-                console.error("Error adding document: ", e);
-                showMessage("Error submitting form. Please try again later.", true);
+                console.error("Error adding document to Firestore: ", e); // Log detailed error
+                let errorMessage = "Error submitting form. Please try again later.";
+                if (e.code) { // Firebase errors usually have a 'code' property
+                    errorMessage = `Error: ${e.code.replace('auth/', '').replace(/-/g, ' ')}. Please check console for details.`;
+                }
+                showMessage(errorMessage, true);
             }
         });
 
@@ -864,9 +874,8 @@ const firebaseConfig = {
             });
 
             // Initial check on page load to ensure textareas are hidden if no "Yes" is selected
-            // (since we removed 'checked' attribute, they should always be hidden initially)
             const checkedYes = document.querySelector(`input[name="${radioGroupName}"][value="Yes"]:checked`);
-            if (!checkedYes) { // If 'Yes' is not checked initially, hide the textarea(s)
+            if (!checkedYes) {
                 textareas.forEach(textarea => {
                     textarea.classList.add('hidden');
                     textarea.removeAttribute('required');
@@ -919,7 +928,7 @@ const firebaseConfig = {
             setupRadioToggle('q17_chronic', 'q17_details');
             setupRadioToggle('q18_psychiatric', 'q18_details');
 
-            setupRadioToggle('q19_family_psychiatric', 'q19_', true); // Pass 'q19_' as prefix and true for multiple textareas
+            setupRadioToggle('q19_family_psychiatric', 'q19_', true);
 
             setupRadioToggle('q20_drugs', 'q20_details');
             setupRadioToggle('q22_substance_abuse', 'q22_details');

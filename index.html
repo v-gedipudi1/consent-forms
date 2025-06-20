@@ -9,7 +9,7 @@
     <style>
         /* Custom styles to enhance Tailwind defaults and match original design intent */
         body {
-            font-family: 'Inter', sans-serif; /* Using Inter as per instructions */
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -154,7 +154,7 @@
             padding: 25px;
             border-radius: 10px;
             margin: 30px 0;
-            border-left: 4px solid #27ae60; /* Corrected '4: px' to '4px' */
+            border-left: 4px solid #27ae60;
         }
 
         .consent-text {
@@ -202,7 +202,30 @@
             color: #e74c3c;
         }
 
-        /* Responsive adjustments */
+        .message-box {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f0fdf4; /* Light green for success */
+            border: 1px solid #10b981; /* Green border */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            text-align: center;
+            font-size: 1.1em;
+            color: #047857; /* Darker green text */
+            max-width: 90%;
+        }
+
+        .message-box.error {
+            background-color: #fef2f2; /* Light red for error */
+            border-color: #ef4444; /* Red border */
+            color: #dc2626; /* Darker red text */
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -244,8 +267,7 @@
                 <p style="margin-top: 15px;"><em>Please also sign at the bottom of each page</em></p>
             </div>
 
-            <!-- The form action will open the user's default email client with the form data -->
-            <form id="tmsForm" action="mailto:healmedclinic@gmail.com?subject=TMS Consent Form Submission&body=Please find the completed TMS Consent Form data below." method="post" enctype="text/plain">
+            <form id="tmsForm">
                 <!-- Personal Information -->
                 <div class="form-group mb-6">
                     <label for="fullName">First- and last name: <span class="required">*</span></label>
@@ -297,7 +319,7 @@
                                 <label for="q1_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q1_no" name="q1_epilepsy" value="No" checked>
+                                <input type="radio" id="q1_no" name="q1_epilepsy" value="No">
                                 <label for="q1_no">No</label>
                             </div>
                         </div>
@@ -312,7 +334,7 @@
                                 <label for="q2_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q2_no" name="q2_seizure" value="No" checked>
+                                <input type="radio" id="q2_no" name="q2_seizure" value="No">
                                 <label for="q2_no">No</label>
                             </div>
                         </div>
@@ -327,7 +349,7 @@
                                 <label for="q3_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q3_no" name="q3_family_epilepsy" value="No" checked>
+                                <input type="radio" id="q3_no" name="q3_family_epilepsy" value="No">
                                 <label for="q3_no">No</label>
                             </div>
                         </div>
@@ -342,7 +364,7 @@
                                 <label for="q4_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q4_no" name="q4_consciousness" value="No" checked>
+                                <input type="radio" id="q4_no" name="q4_consciousness" value="No">
                                 <label for="q4_no">No</label>
                             </div>
                         </div>
@@ -357,7 +379,7 @@
                                 <label for="q5_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q5_no" name="q5_head_trauma" value="No" checked>
+                                <input type="radio" id="q5_no" name="q5_head_trauma" value="No">
                                 <label for="q5_no">No</label>
                             </div>
                         </div>
@@ -372,7 +394,7 @@
                                 <label for="q6_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q6_no" name="q6_stroke" value="No" checked>
+                                <input type="radio" id="q6_no" name="q6_stroke" value="No">
                                 <label for="q6_no">No</label>
                             </div>
                         </div>
@@ -387,7 +409,7 @@
                                 <label for="q7_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q7_no" name="q7_head_surgery" value="No" checked>
+                                <input type="radio" id="q7_no" name="q7_head_surgery" value="No">
                                 <label for="q7_no">No</label>
                             </div>
                         </div>
@@ -441,7 +463,7 @@
                                 <label for="q9_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q9_no" name="q9_deviations" value="No" checked>
+                                <input type="radio" id="q9_no" name="q9_deviations" value="No">
                                 <label for="q9_no">No</label>
                             </div>
                         </div>
@@ -456,7 +478,7 @@
                                 <label for="q10_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q10_no" name="q10_hearing" value="No" checked>
+                                <input type="radio" id="q10_no" name="q10_hearing" value="No">
                                 <label for="q10_no">No</label>
                             </div>
                         </div>
@@ -471,7 +493,7 @@
                                 <label for="q11_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q11_no" name="q11_neurological" value="No" checked>
+                                <input type="radio" id="q11_no" name="q11_neurological" value="No">
                                 <label for="q11_no">No</label>
                             </div>
                         </div>
@@ -486,7 +508,7 @@
                                 <label for="q12_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q12_no" name="q12_headaches" value="No" checked>
+                                <input type="radio" id="q12_no" name="q12_headaches" value="No">
                                 <label for="q12_no">No</label>
                             </div>
                         </div>
@@ -501,7 +523,7 @@
                                 <label for="q13_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q13_no" name="q13_treatment" value="No" checked>
+                                <input type="radio" id="q13_no" name="q13_treatment" value="No">
                                 <label for="q13_no">No</label>
                             </div>
                         </div>
@@ -516,7 +538,7 @@
                                 <label for="q14_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q14_no" name="q14_antibiotics" value="No" checked>
+                                <input type="radio" id="q14_no" name="q14_antibiotics" value="No">
                                 <label for="q14_no">No</label>
                             </div>
                         </div>
@@ -530,7 +552,7 @@
                                 <label for="q15_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q15_no" name="q15_antihistamines" value="No" checked>
+                                <input type="radio" id="q15_no" name="q15_antihistamines" value="No">
                                 <label for="q15_no">No</label>
                             </div>
                         </div>
@@ -545,7 +567,7 @@
                                 <label for="q16_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q16_no" name="q16_other_meds" value="No" checked>
+                                <input type="radio" id="q16_no" name="q16_other_meds" value="No">
                                 <label for="q16_no">No</label>
                             </div>
                         </div>
@@ -560,7 +582,7 @@
                                 <label for="q17_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q17_no" name="q17_chronic" value="No" checked>
+                                <input type="radio" id="q17_no" name="q17_chronic" value="No">
                                 <label for="q17_no">No</label>
                             </div>
                         </div>
@@ -575,7 +597,7 @@
                                 <label for="q18_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q18_no" name="q18_psychiatric" value="No" checked>
+                                <input type="radio" id="q18_no" name="q18_psychiatric" value="No">
                                 <label for="q18_no">No</label>
                             </div>
                         </div>
@@ -590,7 +612,7 @@
                                 <label for="q19_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q19_no" name="q19_family_psychiatric" value="No" checked>
+                                <input type="radio" id="q19_no" name="q19_family_psychiatric" value="No">
                                 <label for="q19_no">No</label>
                             </div>
                         </div>
@@ -606,7 +628,7 @@
                                 <label for="q20_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q20_no" name="q20_drugs" value="No" checked>
+                                <input type="radio" id="q20_no" name="q20_drugs" value="No">
                                 <label for="q20_no">No</label>
                             </div>
                         </div>
@@ -623,7 +645,7 @@
                                 <label for="q22_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q22_no" name="q22_substance_abuse" value="No" checked>
+                                <input type="radio" id="q22_no" name="q22_substance_abuse" value="No">
                                 <label for="q22_no">No</label>
                             </div>
                         </div>
@@ -638,7 +660,7 @@
                                 <label for="q23_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q23_no" name="q23_alcohol" value="No" checked>
+                                <input type="radio" id="q23_no" name="q23_alcohol" value="No">
                                 <label for="q23_no">No</label>
                             </div>
                         </div>
@@ -652,7 +674,7 @@
                                 <label for="q24_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q24_no" name="q24_sleep" value="No" checked>
+                                <input type="radio" id="q24_no" name="q24_sleep" value="No">
                                 <label for="q24_no">No</label>
                             </div>
                         </div>
@@ -667,7 +689,7 @@
                                 <label for="q25_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q25_no" name="q25_pregnant" value="No" checked>
+                                <input type="radio" id="q25_no" name="q25_pregnant" value="No">
                                 <label for="q25_no">No</label>
                             </div>
                         </div>
@@ -681,7 +703,7 @@
                                 <label for="q26_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q26_no" name="q26_mri" value="No" checked>
+                                <input type="radio" id="q26_no" name="q26_mri" value="No">
                                 <label for="q26_no">No</label>
                             </div>
                         </div>
@@ -696,7 +718,7 @@
                                 <label for="q27_tms_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q27_tms_no" name="q27_tms" value="No" checked>
+                                <input type="radio" id="q27_tms_no" name="q27_tms" value="No">
                                 <label for="q27_tms_no">No</label>
                             </div>
                         </div>
@@ -730,59 +752,127 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to toggle the visibility of a textarea(s) based on radio button selection
-            // textareaName can be a string (exact name) or a string prefix for multiple textareas (if isMultipleTextareas is true)
-            function setupRadioToggle(radioGroupName, textareaName, isMultipleTextareas = false) {
-                const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
-                let textareas = [];
+    <!-- Message Box for Success/Error -->
+    <div id="messageBox" class="message-box"></div>
 
-                if (isMultipleTextareas) {
-                    // Use querySelectorAll and convert NodeList to a true Array
-                    textareas = Array.from(document.querySelectorAll(`textarea[name^="${textareaName}"]`));
-                } else {
-                    const singleTextarea = document.querySelector(`textarea[name="${textareaName}"]`);
-                    if (singleTextarea) {
-                        textareas = [singleTextarea];
+    <!-- Firebase SDK - IMPORTANT: Replace with your actual config -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+        // Your Firebase configuration (from Step 1.3 above)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID",
+            // measurementId: "YOUR_MEASUREMENT_ID" // Optional, if you enabled Analytics
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const tmsForm = document.getElementById('tmsForm');
+        const messageBox = document.getElementById('messageBox');
+
+        function showMessage(message, isError = false) {
+            messageBox.textContent = message;
+            messageBox.className = 'message-box'; // Reset classes
+            if (isError) {
+                messageBox.classList.add('error');
+            }
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
+        }
+
+        tmsForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission (which would try mailto)
+
+            const formData = new FormData(tmsForm);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                // For checkboxes, group them into an array
+                if (key === 'implants') {
+                    if (!data[key]) {
+                        data[key] = [];
                     }
-                }
-
-                // If no radios or no textareas found, exit
-                if (!radios.length || textareas.length === 0) return;
-
-                radios.forEach(radio => {
-                    radio.addEventListener('change', function() {
-                        if (this.value === 'Yes') {
-                            textareas.forEach(textarea => {
-                                textarea.classList.remove('hidden');
-                                textarea.setAttribute('required', 'true'); // Make textarea required if 'Yes'
-                            });
-                        } else {
-                            textareas.forEach(textarea => {
-                                textarea.classList.add('hidden');
-                                textarea.removeAttribute('required'); // Remove required if 'No'
-                                textarea.value = ''; // Clear content when hidden
-                            });
-                        }
-                    });
-                });
-
-                // Initial check in case a 'Yes' is pre-checked
-                const checkedYes = document.querySelector(`input[name="${radioGroupName}"][value="Yes"]:checked`);
-                if (checkedYes) {
-                    textareas.forEach(textarea => {
-                        textarea.classList.remove('hidden');
-                        textarea.setAttribute('required', 'true');
-                    });
+                    data[key].push(value);
                 } else {
-                    textareas.forEach(textarea => {
-                        textarea.classList.add('hidden');
-                        textarea.removeAttribute('required');
-                    });
+                    data[key] = value;
                 }
             }
 
+            // Capture the submission timestamp
+            data.submissionTimestamp = new Date().toISOString();
+
+            try {
+                // Add a new document to the "consentForms" collection
+                await addDoc(collection(db, "consentForms"), data);
+                showMessage("Form submitted successfully! Your answers have been recorded.", false);
+                tmsForm.reset(); // Clear the form after successful submission
+                // Re-hide textareas after reset
+                document.querySelectorAll('textarea.form-input').forEach(textarea => {
+                    textarea.classList.add('hidden');
+                    textarea.removeAttribute('required');
+                    textarea.value = '';
+                });
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                showMessage("Error submitting form. Please try again later.", true);
+            }
+        });
+
+        // Function to toggle the visibility of a textarea(s) based on radio button selection
+        function setupRadioToggle(radioGroupName, textareaName, isMultipleTextareas = false) {
+            const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+            let textareas = [];
+
+            if (isMultipleTextareas) {
+                textareas = Array.from(document.querySelectorAll(`textarea[name^="${textareaName}"]`));
+            } else {
+                const singleTextarea = document.querySelector(`textarea[name="${textareaName}"]`);
+                if (singleTextarea) {
+                    textareas = [singleTextarea];
+                }
+            }
+
+            if (!radios.length || textareas.length === 0) return;
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'Yes') {
+                        textareas.forEach(textarea => {
+                            textarea.classList.remove('hidden');
+                            textarea.setAttribute('required', 'true');
+                        });
+                    } else {
+                        textareas.forEach(textarea => {
+                            textarea.classList.add('hidden');
+                            textarea.removeAttribute('required');
+                            textarea.value = '';
+                        });
+                    }
+                });
+            });
+
+            // Initial check on page load to ensure textareas are hidden if no "Yes" is selected
+            // (since we removed 'checked' attribute, they should always be hidden initially)
+            const checkedYes = document.querySelector(`input[name="${radioGroupName}"][value="Yes"]:checked`);
+            if (!checkedYes) { // If 'Yes' is not checked initially, hide the textarea(s)
+                textareas.forEach(textarea => {
+                    textarea.classList.add('hidden');
+                    textarea.removeAttribute('required');
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
             // Setup toggles for each question with a textarea
             setupRadioToggle('q1_epilepsy', 'q1_details');
             setupRadioToggle('q2_seizure', 'q2_details');
@@ -809,12 +899,9 @@
                         }
                     });
                 });
-                // Initial check for implants
+                // Initial check for implants to ensure textarea is hidden
                 const anyImplantCheckedInitially = Array.from(implantCheckboxes).some(cb => cb.checked);
-                if (anyImplantCheckedInitially) {
-                    implantDetailsTextarea.classList.remove('hidden');
-                    implantDetailsTextarea.setAttribute('required', 'true');
-                } else {
+                if (!anyImplantCheckedInitially) {
                     implantDetailsTextarea.classList.add('hidden');
                     implantDetailsTextarea.removeAttribute('required');
                 }
@@ -830,7 +917,6 @@
             setupRadioToggle('q17_chronic', 'q17_details');
             setupRadioToggle('q18_psychiatric', 'q18_details');
 
-            // Special handling for Q19 as it has two textareas (q19_details and q19_relation)
             setupRadioToggle('q19_family_psychiatric', 'q19_', true); // Pass 'q19_' as prefix and true for multiple textareas
 
             setupRadioToggle('q20_drugs', 'q20_details');

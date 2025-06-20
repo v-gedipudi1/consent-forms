@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TMS Informed Consent Form - HealMed Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Custom styles to enhance Tailwind defaults and match original design intent */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif; /* Using Inter as per instructions */
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -95,15 +92,20 @@
             resize: vertical;
         }
 
-        .gender-group {
+        .gender-group, .yes-no-group {
             display: flex;
             gap: 20px;
         }
 
-        .gender-option {
+        .gender-option, .radio-option, .checkbox-option {
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            transform: scale(1.2);
         }
 
         .question-section {
@@ -134,22 +136,6 @@
             color: #2c3e50;
         }
 
-        .yes-no-group {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .radio-option input[type="radio"] {
-            transform: scale(1.2);
-        }
-
         .implant-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -158,16 +144,9 @@
         }
 
         .checkbox-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
             padding: 8px;
             background: #f8f9fa;
             border-radius: 5px;
-        }
-
-        .checkbox-option input[type="checkbox"] {
-            transform: scale(1.2);
         }
 
         .consent-section {
@@ -175,7 +154,7 @@
             padding: 25px;
             border-radius: 10px;
             margin: 30px 0;
-            border-left: 4px solid #27ae60;
+            border-left: 4px solid #27ae60; /* Corrected '4: px' to '4px' */
         }
 
         .consent-text {
@@ -219,9 +198,17 @@
             transform: translateY(0);
         }
 
+        .required {
+            color: #e74c3c;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
             .container {
-                margin: 10px;
+                margin: 0;
                 border-radius: 10px;
             }
 
@@ -237,14 +224,10 @@
                 grid-template-columns: 1fr;
             }
 
-            .gender-group {
+            .gender-group, .yes-no-group {
                 flex-direction: column;
                 gap: 10px;
             }
-        }
-
-        .required {
-            color: #e74c3c;
         }
     </style>
 </head>
@@ -261,14 +244,15 @@
                 <p style="margin-top: 15px;"><em>Please also sign at the bottom of each page</em></p>
             </div>
 
-            <form action="mailto:healmedclinic@gmail.com" method="post" enctype="text/plain" id="tmsForm">
+            <!-- The form action will open the user's default email client with the form data -->
+            <form id="tmsForm" action="mailto:healmedclinic@gmail.com?subject=TMS Consent Form Submission&body=Please find the completed TMS Consent Form data below." method="post" enctype="text/plain">
                 <!-- Personal Information -->
-                <div class="form-group">
+                <div class="form-group mb-6">
                     <label for="fullName">First- and last name: <span class="required">*</span></label>
-                    <input type="text" id="fullName" name="fullName" required>
+                    <input type="text" id="fullName" name="fullName" class="form-input" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-6">
                     <label>Gender: <span class="required">*</span></label>
                     <div class="gender-group">
                         <div class="gender-option">
@@ -279,22 +263,26 @@
                             <input type="radio" id="female" name="gender" value="Female" required>
                             <label for="female">Female</label>
                         </div>
+                        <div class="gender-option">
+                            <input type="radio" id="other_gender" name="gender" value="Other" required>
+                            <label for="other_gender">Other</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-6">
                     <label for="dob">Date of Birth: <span class="required">*</span></label>
-                    <input type="date" id="dob" name="dob" required>
+                    <input type="date" id="dob" name="dob" class="form-input" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-6">
                     <label for="phone">Phone number: <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <input type="tel" id="phone" name="phone" class="form-input" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-6">
                     <label for="email">Email address: <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" class="form-input" required>
                 </div>
 
                 <!-- Screening Questionnaire -->
@@ -309,11 +297,11 @@
                                 <label for="q1_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q1_no" name="q1_epilepsy" value="No">
+                                <input type="radio" id="q1_no" name="q1_epilepsy" value="No" checked>
                                 <label for="q1_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q1_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q1_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -324,11 +312,11 @@
                                 <label for="q2_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q2_no" name="q2_seizure" value="No">
+                                <input type="radio" id="q2_no" name="q2_seizure" value="No" checked>
                                 <label for="q2_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q2_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q2_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -339,11 +327,11 @@
                                 <label for="q3_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q3_no" name="q3_family_epilepsy" value="No">
+                                <input type="radio" id="q3_no" name="q3_family_epilepsy" value="No" checked>
                                 <label for="q3_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q3_details" placeholder="If yes, how are you related to this person?"></textarea>
+                        <textarea name="q3_details" class="form-input mt-3 hidden" placeholder="If yes, how are you related to this person?"></textarea>
                     </div>
 
                     <div class="question">
@@ -354,11 +342,11 @@
                                 <label for="q4_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q4_no" name="q4_consciousness" value="No">
+                                <input type="radio" id="q4_no" name="q4_consciousness" value="No" checked>
                                 <label for="q4_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q4_details" placeholder="If yes, please describe when and how this occurred:"></textarea>
+                        <textarea name="q4_details" class="form-input mt-3 hidden" placeholder="If yes, please describe when and how this occurred:"></textarea>
                     </div>
 
                     <div class="question">
@@ -369,11 +357,11 @@
                                 <label for="q5_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q5_no" name="q5_head_trauma" value="No">
+                                <input type="radio" id="q5_no" name="q5_head_trauma" value="No" checked>
                                 <label for="q5_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q5_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q5_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -384,11 +372,11 @@
                                 <label for="q6_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q6_no" name="q6_stroke" value="No">
+                                <input type="radio" id="q6_no" name="q6_stroke" value="No" checked>
                                 <label for="q6_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q6_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q6_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -399,11 +387,11 @@
                                 <label for="q7_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q7_no" name="q7_head_surgery" value="No">
+                                <input type="radio" id="q7_no" name="q7_head_surgery" value="No" checked>
                                 <label for="q7_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q7_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q7_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -442,7 +430,7 @@
                                 <label for="implant_other">Any other implant not mentioned above</label>
                             </div>
                         </div>
-                        <textarea name="q8_details" placeholder="If you answered 'yes' to any of the questions above, please specify:"></textarea>
+                        <textarea name="q8_details" class="form-input mt-3 hidden" placeholder="If you answered 'yes' to any of the questions above, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -453,11 +441,11 @@
                                 <label for="q9_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q9_no" name="q9_deviations" value="No">
+                                <input type="radio" id="q9_no" name="q9_deviations" value="No" checked>
                                 <label for="q9_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q9_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q9_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -468,11 +456,11 @@
                                 <label for="q10_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q10_no" name="q10_hearing" value="No">
+                                <input type="radio" id="q10_no" name="q10_hearing" value="No" checked>
                                 <label for="q10_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q10_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q10_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -483,11 +471,11 @@
                                 <label for="q11_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q11_no" name="q11_neurological" value="No">
+                                <input type="radio" id="q11_no" name="q11_neurological" value="No" checked>
                                 <label for="q11_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q11_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q11_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -498,11 +486,11 @@
                                 <label for="q12_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q12_no" name="q12_headaches" value="No">
+                                <input type="radio" id="q12_no" name="q12_headaches" value="No" checked>
                                 <label for="q12_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q12_details" placeholder="If yes, please describe how often, and on which occasions:"></textarea>
+                        <textarea name="q12_details" class="form-input mt-3 hidden" placeholder="If yes, please describe how often, and on which occasions:"></textarea>
                     </div>
 
                     <div class="question">
@@ -513,11 +501,11 @@
                                 <label for="q13_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q13_no" name="q13_treatment" value="No">
+                                <input type="radio" id="q13_no" name="q13_treatment" value="No" checked>
                                 <label for="q13_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q13_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q13_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -528,7 +516,7 @@
                                 <label for="q14_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q14_no" name="q14_antibiotics" value="No">
+                                <input type="radio" id="q14_no" name="q14_antibiotics" value="No" checked>
                                 <label for="q14_no">No</label>
                             </div>
                         </div>
@@ -542,11 +530,11 @@
                                 <label for="q15_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q15_no" name="q15_antihistamines" value="No">
+                                <input type="radio" id="q15_no" name="q15_antihistamines" value="No" checked>
                                 <label for="q15_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q15_details" placeholder="If yes, how often and when was the last time you took them?"></textarea>
+                        <textarea name="q15_details" class="form-input mt-3 hidden" placeholder="If yes, how often and when was the last time you took them?"></textarea>
                     </div>
 
                     <div class="question">
@@ -557,11 +545,11 @@
                                 <label for="q16_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q16_no" name="q16_other_meds" value="No">
+                                <input type="radio" id="q16_no" name="q16_other_meds" value="No" checked>
                                 <label for="q16_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q16_details" placeholder="If yes, please list:"></textarea>
+                        <textarea name="q16_details" class="form-input mt-3 hidden" placeholder="If yes, please list:"></textarea>
                     </div>
 
                     <div class="question">
@@ -572,11 +560,11 @@
                                 <label for="q17_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q17_no" name="q17_chronic" value="No">
+                                <input type="radio" id="q17_no" name="q17_chronic" value="No" checked>
                                 <label for="q17_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q17_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q17_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -587,11 +575,11 @@
                                 <label for="q18_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q18_no" name="q18_psychiatric" value="No">
+                                <input type="radio" id="q18_no" name="q18_psychiatric" value="No" checked>
                                 <label for="q18_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q18_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q18_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -602,12 +590,12 @@
                                 <label for="q19_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q19_no" name="q19_family_psychiatric" value="No">
+                                <input type="radio" id="q19_no" name="q19_family_psychiatric" value="No" checked>
                                 <label for="q19_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q19_details" placeholder="If yes, please specify:"></textarea>
-                        <textarea name="q19_relation" placeholder="How are you related to this person?"></textarea>
+                        <textarea name="q19_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q19_relation" class="form-input mt-3 hidden" placeholder="How are you related to this person?"></textarea>
                     </div>
 
                     <div class="question">
@@ -618,12 +606,14 @@
                                 <label for="q20_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q20_no" name="q20_drugs" value="No">
+                                <input type="radio" id="q20_no" name="q20_drugs" value="No" checked>
                                 <label for="q20_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q20_details" placeholder="If yes, please specify which drugs did you use, and when was the last time that you used them?"></textarea>
+                        <textarea name="q20_details" class="form-input mt-3 hidden" placeholder="If yes, please specify which drugs did you use, and when was the last time that you used them?"></textarea>
                     </div>
+
+                    <!-- Question 21 is intentionally skipped as per the provided physical copy's numbering -->
 
                     <div class="question">
                         <div class="question-text">22) Have you ever suffered from substance dependence or abuse?</div>
@@ -633,11 +623,11 @@
                                 <label for="q22_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q22_no" name="q22_substance_abuse" value="No">
+                                <input type="radio" id="q22_no" name="q22_substance_abuse" value="No" checked>
                                 <label for="q22_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q22_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q22_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -648,7 +638,7 @@
                                 <label for="q23_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q23_no" name="q23_alcohol" value="No">
+                                <input type="radio" id="q23_no" name="q23_alcohol" value="No" checked>
                                 <label for="q23_no">No</label>
                             </div>
                         </div>
@@ -662,11 +652,11 @@
                                 <label for="q24_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q24_no" name="q24_sleep" value="No">
+                                <input type="radio" id="q24_no" name="q24_sleep" value="No" checked>
                                 <label for="q24_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q24_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q24_details" class="form-input mt-3 hidden" placeholder="If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
@@ -677,7 +667,7 @@
                                 <label for="q25_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q25_no" name="q25_pregnant" value="No">
+                                <input type="radio" id="q25_no" name="q25_pregnant" value="No" checked>
                                 <label for="q25_no">No</label>
                             </div>
                         </div>
@@ -691,162 +681,163 @@
                                 <label for="q26_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q26_no" name="q26_mri" value="No">
+                                <input type="radio" id="q26_no" name="q26_mri" value="No" checked>
                                 <label for="q26_no">No</label>
                             </div>
                         </div>
-                        <textarea name="q26_details" placeholder="If yes, did any problems occur during scanning? If yes, please specify:"></textarea>
+                        <textarea name="q26_details" class="form-input mt-3 hidden" placeholder="If yes, did any problems occur during scanning? If yes, please specify:"></textarea>
                     </div>
 
                     <div class="question">
                         <div class="question-text">27) Have you ever undergone TMS?</div>
                         <div class="yes-no-group">
                             <div class="radio-option">
-                                <input type="radio" id="q27_yes" name="q27_tms" value="Yes">
-                                <label for="q27_yes">Yes</label>
+                                <input type="radio" id="q27_tms_yes" name="q27_tms" value="Yes">
+                                <label for="q27_tms_yes">Yes</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="q27_no" name="q27_tms" value="No">
-                                <label for="q27_no">No</label>
+                                <input type="radio" id="q27_tms_no" name="q27_tms" value="No" checked>
+                                <label for="q27_tms_no">No</label>
                             </div>
                         </div>
-                        <div class="question-text" style="margin-top: 15px;">If yes, have you ever had an adverse reaction to TMS?</div>
-                        <div class="yes-no-group">
-                            <div class="radio-option">
-                                <input type="radio" id="q27_reaction_yes" name="q27_tms_reaction" value="Yes">
-                                <label for="q27_reaction_yes">Yes</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="q27_reaction_no" name="q27_tms_reaction" value="No">
-                                <label for="q27_reaction_no">No</label>
-                            </div>
-                        </div>
-                        <textarea name="q27_details" placeholder="If yes, please specify:"></textarea>
+                        <textarea name="q27_details" class="form-input mt-3 hidden" placeholder="If yes, have you ever had an adverse reaction to TMS? If yes, please specify:"></textarea>
                     </div>
                 </div>
 
                 <!-- Consent Section -->
                 <div class="consent-section">
-                    <div class="consent-text">
-                        I answered all questions truthfully and to the best of my knowledge and belief. If deemed medically appropriate by my physician, I consent to undergo transcranial magnetic stimulation under the care and direction of my physician.
+                    <h3>Informed Consent for TMS Treatment</h3>
+                    <p class="consent-text">I answered all questions truthfully and to the best of my knowledge and belief. If deemed medically appropriate by my physician, I consent to undergo transcranial magnetic stimulation under the care and direction of my physician.</p>
+                </div>
+
+                <!-- Signature Section -->
+                <div class="signature-section">
+                    <div class="form-group">
+                        <label for="patientSignature">Signature: <span class="required">*</span></label>
+                        <input type="text" id="patientSignature" name="patientSignature" class="form-input" placeholder="Type your full name as signature" required>
                     </div>
-                    
-                    <div class="signature-section">
-                        <div class="form-group">
-                            <label for="signature">Signature: <span class="required">*</span></label>
-                            <input type="text" id="signature" name="signature" placeholder="Type your full name as signature" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="signatureDate">Date: <span class="required">*</span></label>
-                            <input type="date" id="signatureDate" name="signatureDate" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="signatureDate">Date: <span class="required">*</span></label>
+                        <input type="date" id="signatureDate" name="signatureDate" class="form-input" required>
                     </div>
                 </div>
 
+                <!-- Submit Button -->
                 <div class="submit-section">
-                    <button type="submit" class="submit-btn" onclick="submitForm()">Submit Consent Form</button>
+                    <button type="submit" class="submit-btn">Submit Consent Form</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        function submitForm() {
-            // Get form data
-            const form = document.getElementById('tmsForm');
-            const formData = new FormData(form);
-            
-            // Create email body
-            let emailBody = "TMS Informed Consent Form Submission\n\n";
-            emailBody += "=== PATIENT INFORMATION ===\n";
-            emailBody += `Name: ${formData.get('fullName')}\n`;
-            emailBody += `Gender: ${formData.get('gender')}\n`;
-            emailBody += `Date of Birth: ${formData.get('dob')}\n`;
-            emailBody += `Phone: ${formData.get('phone')}\n`;
-            emailBody += `Email: ${formData.get('email')}\n\n`;
-            
-            emailBody += "=== SCREENING QUESTIONNAIRE RESPONSES ===\n";
-            
-            // Add all questions and responses
-            const questions = [
-                {key: 'q1_epilepsy', text: '1) Do you have epilepsy?', details: 'q1_details'},
-                {key: 'q2_seizure', text: '2) Have you ever had a convulsion or a seizure?', details: 'q2_details'},
-                {key: 'q3_family_epilepsy', text: '3) Does someone in your family have epilepsy?', details: 'q3_details'},
-                {key: 'q4_consciousness', text: '4) Have you ever lost consciousness without any known reason?', details: 'q4_details'},
-                {key: 'q5_head_trauma', text: '5) Have you ever had a severe head trauma?', details: 'q5_details'},
-                {key: 'q6_stroke', text: '6) Have you ever had a stroke?', details: 'q6_details'},
-                {key: 'q7_head_surgery', text: '7) Have you ever undergone surgery to your head?', details: 'q7_details'},
-                {key: 'q9_deviations', text: '9) Do you have any deviations of the spinal cord, bone marrow, or ventricular system?', details: 'q9_details'},
-                {key: 'q10_hearing', text: '10) Do you have any hearing disabilities or ringing in your ears?', details: 'q10_details'},
-                {key: 'q11_neurological', text: '11) Have you ever suffered from a brain-related, neurological illness?', details: 'q11_details'},
-                {key: 'q12_headaches', text: '12) Do you suffer from frequent severe headaches?', details: 'q12_details'},
-                {key: 'q13_treatment', text: '13) Are you currently under any form of medical treatment?', details: 'q13_details'},
-                {key: 'q14_antibiotics', text: '14) Are you currently taking antibiotics?'},
-                {key: 'q15_antihistamines', text: '15) Do you ever take antihistamines?', details: 'q15_details'},
-                {key: 'q16_other_meds', text: '16) Are you taking any other medications not mentioned above?', details: 'q16_details'},
-                {key: 'q17_chronic', text: '17) Do you have a chronic illness/disorder?', details: 'q17_details'},
-                {key: 'q18_psychiatric', text: '18) Have you ever had a psychiatric-based illness/disorder?', details: 'q18_details'},
-                {key: 'q19_family_psychiatric', text: '19) Does someone in your family have a psychiatric-based illness/disorder?', details: 'q19_details'},
-                {key: 'q20_drugs', text: '20) Have you used any recreational drugs during the past year?', details: 'q20_details'},
-                {key: 'q22_substance_abuse', text: '22) Have you ever suffered from substance dependence or abuse?', details: 'q22_details'},
-                {key: 'q23_alcohol', text: '23) Do you averagely consume more than 3 alcoholic units a day?'},
-                {key: 'q24_sleep', text: '24) Do you have sleeping problems?', details: 'q24_details'},
-                {key: 'q25_pregnant', text: '25) Are you pregnant, or is there a chance that you might be?'},
-                {key: 'q26_mri', text: '26) Have you ever undergone an MRI for clinical purposes?', details: 'q26_details'},
-                {key: 'q27_tms', text: '27) Have you ever undergone TMS?', details: 'q27_details'}
-            ];
-            
-            questions.forEach(q => {
-                const answer = formData.get(q.key);
-                if (answer) {
-                    emailBody += `${q.text} ${answer}\n`;
-                    if (q.details && formData.get(q.details)) {
-                        emailBody += `   Details: ${formData.get(q.details)}\n`;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to toggle the visibility of a textarea(s) based on radio button selection
+            // textareaName can be a string (exact name) or a string prefix for multiple textareas (if isMultipleTextareas is true)
+            function setupRadioToggle(radioGroupName, textareaName, isMultipleTextareas = false) {
+                const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+                let textareas = [];
+
+                if (isMultipleTextareas) {
+                    // Use querySelectorAll and convert NodeList to a true Array
+                    textareas = Array.from(document.querySelectorAll(`textarea[name^="${textareaName}"]`));
+                } else {
+                    const singleTextarea = document.querySelector(`textarea[name="${textareaName}"]`);
+                    if (singleTextarea) {
+                        textareas = [singleTextarea];
                     }
                 }
-            });
-            
-            // Add implants
-            const implants = formData.getAll('implants');
-            if (implants.length > 0) {
-                emailBody += `8) Implants in body: ${implants.join(', ')}\n`;
-                if (formData.get('q8_details')) {
-                    emailBody += `   Details: ${formData.get('q8_details')}\n`;
+
+                // If no radios or no textareas found, exit
+                if (!radios.length || textareas.length === 0) return;
+
+                radios.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        if (this.value === 'Yes') {
+                            textareas.forEach(textarea => {
+                                textarea.classList.remove('hidden');
+                                textarea.setAttribute('required', 'true'); // Make textarea required if 'Yes'
+                            });
+                        } else {
+                            textareas.forEach(textarea => {
+                                textarea.classList.add('hidden');
+                                textarea.removeAttribute('required'); // Remove required if 'No'
+                                textarea.value = ''; // Clear content when hidden
+                            });
+                        }
+                    });
+                });
+
+                // Initial check in case a 'Yes' is pre-checked
+                const checkedYes = document.querySelector(`input[name="${radioGroupName}"][value="Yes"]:checked`);
+                if (checkedYes) {
+                    textareas.forEach(textarea => {
+                        textarea.classList.remove('hidden');
+                        textarea.setAttribute('required', 'true');
+                    });
+                } else {
+                    textareas.forEach(textarea => {
+                        textarea.classList.add('hidden');
+                        textarea.removeAttribute('required');
+                    });
                 }
             }
-            
-            // Add TMS reaction
-            if (formData.get('q27_tms_reaction')) {
-                emailBody += `   TMS Adverse Reaction: ${formData.get('q27_tms_reaction')}\n`;
+
+            // Setup toggles for each question with a textarea
+            setupRadioToggle('q1_epilepsy', 'q1_details');
+            setupRadioToggle('q2_seizure', 'q2_details');
+            setupRadioToggle('q3_family_epilepsy', 'q3_details');
+            setupRadioToggle('q4_consciousness', 'q4_details');
+            setupRadioToggle('q5_head_trauma', 'q5_details');
+            setupRadioToggle('q6_stroke', 'q6_details');
+            setupRadioToggle('q7_head_surgery', 'q7_details');
+
+            // For implants (q8), we listen to all checkboxes
+            const implantCheckboxes = document.querySelectorAll('input[name="implants"]');
+            const implantDetailsTextarea = document.querySelector('textarea[name="q8_details"]');
+            if (implantCheckboxes.length && implantDetailsTextarea) {
+                implantCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const anyChecked = Array.from(implantCheckboxes).some(cb => cb.checked);
+                        if (anyChecked) {
+                            implantDetailsTextarea.classList.remove('hidden');
+                            implantDetailsTextarea.setAttribute('required', 'true');
+                        } else {
+                            implantDetailsTextarea.classList.add('hidden');
+                            implantDetailsTextarea.removeAttribute('required');
+                            implantDetailsTextarea.value = '';
+                        }
+                    });
+                });
+                // Initial check for implants
+                const anyImplantCheckedInitially = Array.from(implantCheckboxes).some(cb => cb.checked);
+                if (anyImplantCheckedInitially) {
+                    implantDetailsTextarea.classList.remove('hidden');
+                    implantDetailsTextarea.setAttribute('required', 'true');
+                } else {
+                    implantDetailsTextarea.classList.add('hidden');
+                    implantDetailsTextarea.removeAttribute('required');
+                }
             }
-            
-            // Add family psychiatric relation
-            if (formData.get('q19_relation')) {
-                emailBody += `   Family Relation: ${formData.get('q19_relation')}\n`;
-            }
-            
-            emailBody += "\n=== CONSENT ===\n";
-            emailBody += `Signature: ${formData.get('signature')}\n`;
-            emailBody += `Date: ${formData.get('signatureDate')}\n`;
-            emailBody += "\nPatient has consented to undergo transcranial magnetic stimulation under physician care and direction.\n";
-            
-            // Create mailto link
-            const subject = encodeURIComponent("TMS Informed Consent Form - " + formData.get('fullName'));
-            const body = encodeURIComponent(emailBody);
-            const mailtoLink = `mailto:healmedclinic@gmail.com?subject=${subject}&body=${body}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Prevent default form submission
-            return false;
-        }
-        
-        // Set today's date as default for signature date
-        document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('signatureDate').value = today;
+
+            setupRadioToggle('q9_deviations', 'q9_details');
+            setupRadioToggle('q10_hearing', 'q10_details');
+            setupRadioToggle('q11_neurological', 'q11_details');
+            setupRadioToggle('q12_headaches', 'q12_details');
+            setupRadioToggle('q13_treatment', 'q13_details');
+            setupRadioToggle('q15_antihistamines', 'q15_details');
+            setupRadioToggle('q16_other_meds', 'q16_details');
+            setupRadioToggle('q17_chronic', 'q17_details');
+            setupRadioToggle('q18_psychiatric', 'q18_details');
+
+            // Special handling for Q19 as it has two textareas (q19_details and q19_relation)
+            setupRadioToggle('q19_family_psychiatric', 'q19_', true); // Pass 'q19_' as prefix and true for multiple textareas
+
+            setupRadioToggle('q20_drugs', 'q20_details');
+            setupRadioToggle('q22_substance_abuse', 'q22_details');
+            setupRadioToggle('q24_sleep', 'q24_details');
+            setupRadioToggle('q26_mri', 'q26_details');
+            setupRadioToggle('q27_tms', 'q27_details');
         });
     </script>
 </body>
